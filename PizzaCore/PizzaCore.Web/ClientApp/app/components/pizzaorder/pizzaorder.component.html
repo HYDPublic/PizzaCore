@@ -1,0 +1,42 @@
+<h1>Order pizza</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<h2 *ngIf="order.name">Order for {{ order.name }}</h2>
+<p>Address: {{ order.address }}</p>
+
+<form #pizzaOrderForm="ngForm">
+    <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="order.name" name="name" placeholder="Enter name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Address</label>
+        <input [(ngModel)]="order.address" name="address" placeholder="Enter address here" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Pizza size</label>
+        <select [(ngModel)]="order.size" name="pizzaSize" class="form-control">
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Toppings</label>
+        <ul *ngIf="toppings" class="list-unstyled">
+            <li *ngFor="let topping of toppings">
+                <input type="checkbox" [(ngModel)]="topping.selected" name="toppings" id="topping-{{ topping.name }}" [value]="topping"/>
+                <label for="topping-{{ topping.name }}">{{ topping.name }}</label>
+            </li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <button (click)="orderPizza()" type="submit" class="btn btn-default">Order pizza</button>
+    </div>
+</form>
+
+
+<p *ngIf="!availableToppings"><em>Loading...</em></p>
+
+
